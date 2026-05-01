@@ -3,6 +3,7 @@ package ahorcado;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,16 +12,36 @@ import java.util.Random;
 public class BancoPalabras {
 
     private ArrayList<Palabra> listaPalabras;
-    private static final String ARCHIVO_CSV = "palabras_ahorcado.csv";
+    private static final String ARCHIVO_CSV = "palabras_ahorcado_v2.csv";
 
     public BancoPalabras() {
         listaPalabras = new ArrayList<>();
-        cargarDesdeCSV();
+        if (validarArchivo()) {
+            cargarDesdeCSV();
+        }
+    }
+
+    private boolean validarArchivo() {
+        File archivo = new File(ARCHIVO_CSV);
+
+        // Validar si el archivo existe
+        if (!archivo.exists()) {
+            JOptionPane.showMessageDialog(null,
+                    "ERROR CRÍTICO: No se encontró el archivo '" + ARCHIVO_CSV + "'.\n"
+                    + "Asegúrese de que el archivo esté en la misma carpeta que el juego (al lado del .jar).",
+                    "Archivo No Encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+
+            // Opcional: Cerrar la aplicación si el archivo es indispensable
+            System.exit(0);
+            return false;
+        }
+        return true;
     }
 
     private void cargarDesdeCSV() {
         try {
-            FileInputStream fis = new FileInputStream("palabras_ahorcado_v2.csv");
+            FileInputStream fis = new FileInputStream(ARCHIVO_CSV);
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
 

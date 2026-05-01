@@ -29,7 +29,7 @@ public class AhorcadoGUI extends JFrame {
 
         // Configuración del JFrame (Heredado de JFrame)
         this.setTitle("Juego del Ahorcado Interactivo - POO");
-        this.setSize(1200, 700);
+        this.setSize(1300, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout(15, 15));
         this.getContentPane().setBackground(new Color(240, 240, 240));
